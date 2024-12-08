@@ -2,14 +2,14 @@ function modelo_fotovoltaico()
   % Verifica se há argumentos passados
   args = argv();
   if length(args) < 4
-      error('Por favor, forneça os quatro parâmetros necessários: TC, I_SC, V_dc, Vmp');
+      error('Por favor, forneça os quatro parâmetros necessário');
   end
 
   % Converte os argumentos de string para números
   TC = str2double(args{1});   % Coeficiente de temperatura (°C^-1)
-  I_SC = str2double(args{2}); % Corrente de curto-circuito (A)
-  V_dc = str2double(args{3}); % Tensão de circuito aberto (V)
-  Vmp = str2double(args{4});  % Tensão no ponto de máxima potência (V)
+  V_dc = str2double(args{2}); % Tensão de circuito aberto (V)
+  Vmp = str2double(args{3});  % Tensão no ponto de máxima potência (V)
+  I_SC = str2double(args{4}); % Corrente de curto-circuito (A)
   % Constantes
   q = 1.60217662 * 10^(-19);  % Carga elementar (C)
   k = 1.38064852 * 10^(-23);  % Constante de Boltzmann (J/K)
