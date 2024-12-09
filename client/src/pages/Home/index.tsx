@@ -16,9 +16,9 @@ export function Home() {
       setIsGraphVisible(false);
 
       const payload = {
-        temperature: data.TC,
-        voltage: data.V_dc,
-        maxPower: data.Vmp,
+        temperatureCoefficient: data.TC,
+        voltage: data.V_DC,
+        temperature: data.T_0,
         current: data.I_SC,
       };
 

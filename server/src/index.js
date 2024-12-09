@@ -34,13 +34,13 @@ function runOctaveScript(params) {
 
 // Rota para receber a requisição POST e executar o script Octave
 app.post('/run-model', async (req, res) => {
-    const { temperature, voltage, maxPower, current } = req.body;
+    const { temperatureCoefficient, voltage, temperature, current } = req.body;
 
     // Verifique se todos os parâmetros necessários estão presentes
-    if (temperature && voltage && maxPower && current) {
+    if (temperatureCoefficient && voltage && temperature && current) {
         try {
             // Chame o Octave passando os parâmetros
-            const result = await runOctaveScript([temperature, voltage, maxPower, current]);
+            const result = await runOctaveScript([temperatureCoefficient, voltage, temperature, current]);
             res.json({ message: 'Script executado com sucesso', result });
         } catch (error) {
             res.status(500).json({ message: error.message });
