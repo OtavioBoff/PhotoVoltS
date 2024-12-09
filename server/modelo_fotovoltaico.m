@@ -35,8 +35,9 @@ function modelo_fotovoltaico()
   legend_entries = {};
 
   for G = G_vals
+    I_SC_adjusted = I_SC * (1 + TC * (T_0));  
     % Fotocorrente (I_ph) depende da irradiância G
-    I_ph = (G / 1000) * I_SC;  % Corrente fotovoltaica gerada
+    I_ph = (G / 1000) * I_SC_adjusted;  % Corrente fotovoltaica gerada
 
     % Corrente de saturação (I_0) depende da temperatura
     I_0 = I_00 * (T_0 / 298.15)^3 * exp(-q * 1.12 / (n * k) * (1 / T_0 - 1 / 298.15));
@@ -67,7 +68,9 @@ function modelo_fotovoltaico()
   legend_entries = {};
 
   for G = G_vals
-    I_ph = (G / 1000) * I_SC;  % Corrente fotovoltaica gerada
+   I_SC_adjusted = I_SC * (1 + TC * (T_0));  
+    % Fotocorrente (I_ph) depende da irradiância G
+    I_ph = (G / 1000) * I_SC_adjusted;  % Corrente fotovoltaica gerada
     I_0 = I_00 * (T_0 / 298.15)^3 * exp(-q * 1.12 / (n * k) * (1 / T_0 - 1 / 298.15));
 
     % Corrente (I) e Potência (P)
@@ -100,7 +103,8 @@ function modelo_fotovoltaico()
   legend_entries = {};
 
   for T = temperatures
-    I_ph = (1000 / 1000) * I_SC;  % Corrente fotovoltaica gerada para G = 1000 W/m²
+    I_SC_adjusted = I_SC * (1 + TC * (T - T_0));  
+    I_ph = (1000 / 1000) * I_SC_adjusted; 
     I_0 = I_00 * (T / 298.15)^3 * exp(-q * 1.12 / (n * k) * (1 / T - 1 / 298.15));
 
     % Corrente (I) usando a equação do diodo único
@@ -129,7 +133,8 @@ function modelo_fotovoltaico()
   legend_entries = {};
 
   for T = temperatures
-    I_ph = (1000 / 1000) * I_SC;  % Corrente fotovoltaica gerada para G = 1000 W/m²
+    I_SC_adjusted = I_SC * (1 + TC * (T - T_0));  
+    I_ph = (1000 / 1000) * I_SC_adjusted; 
     I_0 = I_00 * (T / 298.15)^3 * exp(-q * 1.12 / (n * k) * (1 / T - 1 / 298.15));
 
     % Corrente (I) e Potência (P)
@@ -160,4 +165,3 @@ end
 
 % Chame a função
 modelo_fotovoltaico();
-
