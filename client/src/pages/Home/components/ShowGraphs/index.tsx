@@ -1,7 +1,12 @@
 import { Label, StyledImage } from "./styles";
 
-export function ShowGraphs({ timestamp }: { timestamp: number }) {
-  const ip = "192.168.0.13";
+export function ShowGraphs({
+  timestamp,
+  ip,
+}: {
+  timestamp: number;
+  ip: string;
+}) {
   return (
     <>
       <Label>Gráficos gerados:</Label>

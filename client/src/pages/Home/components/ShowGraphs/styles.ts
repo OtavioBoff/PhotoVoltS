@@ -8,7 +8,7 @@ export const StyledImage = styled.img`
   height: 196px;
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.4);
   }
 `;
 export const Label = styled.label`

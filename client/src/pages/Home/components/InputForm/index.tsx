@@ -2,10 +2,11 @@ import { useForm } from "react-hook-form";
 import { FormContainer, Input, InputBox, Label, SubmitButton } from "./styles";
 
 export interface FormParams {
+  T_0: number;
   TC: number;
   I_SC: number;
   V_DC: number;
-  T_0: number;
+  V_MP: number;
 }
 interface InputFormProps {
   onSubmit: (data: FormParams) => void;
@@ -31,6 +32,13 @@ export function InputForm({ onSubmit }: InputFormProps) {
         />
       </InputBox>
       <InputBox>
+        <Label>Corrente de curto-circuito (A)</Label>
+        <Input
+          placeholder="0"
+          {...register("I_SC", { required: true, valueAsNumber: true })}
+        />
+      </InputBox>
+      <InputBox>
         <Label>Tensão de circuito aberto (V)</Label>
         <Input
           placeholder="0"
@@ -38,10 +46,10 @@ export function InputForm({ onSubmit }: InputFormProps) {
         />
       </InputBox>
       <InputBox>
-        <Label>Corrente de curto-circuito (A)</Label>
+        <Label>Tensão de máxima potencia (V)</Label>
         <Input
           placeholder="0"
-          {...register("I_SC", { required: true, valueAsNumber: true })}
+          {...register("V_MP", { required: true, valueAsNumber: true })}
         />
       </InputBox>
       <SubmitButton type="submit">Gerar Gráficos</SubmitButton>

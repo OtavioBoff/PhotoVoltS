@@ -10,19 +10,22 @@ export function Home() {
   const [isCreatingGraph, setIsCreatingGraph] = useState<boolean>(false);
   const [timestamp, setTimestamp] = useState<number>(Date.now());
 
+  const ip = "172.20.7.51";
+
   const handleFormSubmit = async (data: FormParams) => {
     try {
       setIsCreatingGraph(true);
       setIsGraphVisible(false);
 
       const payload = {
-        temperatureCoefficient: data.TC,
-        voltage: data.V_DC,
         temperature: data.T_0,
+        temperatureCoefficient: data.TC,
         current: data.I_SC,
+        voltage: data.V_DC,
+        maxPower: data.V_MP,
       };
 
-      await axios.post(`http://192.168.0.13:3000/run-model`, payload);
+      await axios.post(`http://${ip}:3000/run-model`, payload);
       console.log("Dados enviados com sucesso");
 
       setTimestamp(Date.now());
@@ -41,7 +44,7 @@ export function Home() {
       </Box>
       {isGraphVisible && (
         <Box>
-          <ShowGraphs timestamp={timestamp} />
+          <ShowGraphs timestamp={timestamp} ip={ip} />
         </Box>
       )}
       {isCreatingGraph && (

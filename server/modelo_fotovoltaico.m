@@ -6,17 +6,18 @@ function modelo_fotovoltaico()
   end
 
   % Converte os argumentos de string para números
-  TC = str2double(args{1});   % Coeficiente de temperatura (°C^-1)
-  V_dc = str2double(args{2}); % Tensão de circuito aberto (V)
-  I_SC = str2double(args{4}); % Corrente de curto-circuito (A)
-  T_0 = str2double(args{3});  % Temperatura ambiente (°C)
+  T_0 = str2double(args{1});  % Temperatura ambiente (°C)
+  TC = str2double(args{2});   % Coeficiente de temperatura (°C^-1)
+  I_SC = str2double(args{3}); % Corrente de curto-circuito (A)
+  V_dc = str2double(args{4}); % Tensão de circuito aberto (V)
+  Vmp = str2double(args{5}); % Tensão de circuito aberto (V)
   % Constantes
   q = 1.60217662 * 10^(-19);  % Carga elementar (C)
   k = 1.38064852 * 10^(-23);  % Constante de Boltzmann (J/K)
   n = 1.4;                     % Fator de idealidade
-  T_0 = T_0 + 273.15;          % Conversão da Temperatura de referência (K)
+  T_0 = T_0 + 273,15;          % Conversão da Temperatura de referência (K)
   I_00 = 1.2799e-8;            % Corrente de saturação inicial (A)
-  R_sh = 10;                  % Resistência de shunt (Ω)
+  R_sh = 100;                  % Resistência de shunt (Ω)
 
   % Cria a pasta 'ctave-image' caso não exista
   if ~exist('octave-image', 'dir')
@@ -24,7 +25,7 @@ function modelo_fotovoltaico()
   end
 
   % Tensão (V)
-  V = linspace(0, V_dc, 100); 
+  V = linspace(0, Vmp/V_dc, 100); 
 
   % Curvas para irradiância variável
   G_vals = [200, 500, 800, 1000]; % Irradiâncias em W/m²

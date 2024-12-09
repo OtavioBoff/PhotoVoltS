@@ -3,7 +3,7 @@ const { exec } = require('child_process');
 const path = require('path');
 
 const port = 3000;
-const ip = "192.168.0.13";
+const ip = "172.20.7.51";
 const cors = require('cors');
 const app = express();
 
@@ -34,13 +34,13 @@ function runOctaveScript(params) {
 
 // Rota para receber a requisição POST e executar o script Octave
 app.post('/run-model', async (req, res) => {
-    const { temperatureCoefficient, voltage, temperature, current } = req.body;
+    const { temperature, temperatureCoefficient, current, voltage, maxPower } = req.body;
 
     // Verifique se todos os parâmetros necessários estão presentes
-    if (temperatureCoefficient && voltage && temperature && current) {
+    if (temperatureCoefficient && voltage && temperature && current && maxPower) {
         try {
             // Chame o Octave passando os parâmetros
-            const result = await runOctaveScript([temperatureCoefficient, voltage, temperature, current]);
+            const result = await runOctaveScript([temperature, temperatureCoefficient, current, voltage, maxPower]);
             res.json({ message: 'Script executado com sucesso', result });
         } catch (error) {
             res.status(500).json({ message: error.message });
